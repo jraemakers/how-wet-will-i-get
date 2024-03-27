@@ -17,6 +17,57 @@ const getWeather = async (location) => {
     }
 };
 
+function getCurrentDateTime() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+const calcConditionCode = (rain) => {
+    if (rain === 0) {
+        return 0;
+    }
+
+    if (rain > 0 && rain <= 2.5) {
+        return 1;
+    }
+
+    if (rain > 2.5 && rain <= 7.5) {
+        return 2;
+    }
+
+    if (rain > 7.5) {
+        return 3;
+    }
+
+    throw Error('Invalid rain value');
+};
+
+const formatWeatherData = (weatherData) => {
+    return {
+        current_datetime: getCurrentDateTime(),
+        location: weatherData.city.name,
+        weather_data: weatherData.list.map((item) => {
+            return {
+                timestamp: item.dt_txt,
+                rain: item.rain ? item.rain['3h'] : 0,
+                temperature: item.main.temp,
+                condition_code: calcConditionCode(
+                    item.rain ? item.rain['3h'] : 0,
+                ),
+            };
+        }),
+    };
+};
+
 app.get('/weather', async (req, res) => {
     const location = req.query.location;
 
@@ -26,7 +77,10 @@ app.get('/weather', async (req, res) => {
 
     try {
         const weatherData = await getWeather(location);
-        res.json(weatherData);
+
+        const data = formatWeatherData(weatherData);
+
+        res.json(data);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: `An error occurred: ${error.message}` });
