@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 68.0),
               child: Center(
                 child: Text(
@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16), // Add some space between text and image
+            SizedBox(height: 16), // Add some space between text and image
             Padding(
               padding: const EdgeInsets.only(bottom: 38.0), // Add padding only at the bottom
               child: Center(
@@ -48,8 +48,8 @@ class MainApp extends StatelessWidget {
                 width: 150, // Adjust width as needed
               ),
             ),
-            const SizedBox(height: 1),
-            const Divider(
+            SizedBox(height: 1),
+            Divider(
               color: Colors.white,
               thickness: 1.0,
             ),
@@ -60,10 +60,53 @@ class MainApp extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w800,
+                  fontFamily: 'Poppins',
                 ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 100.0, top: 20), // Add left padding
+                  child: Text(
+                    'Temp',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 118.0), // Adjust left padding
+                  child: Text(
+                    '10',
+                    style: TextStyle(
+                      fontSize: 66,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                ),
+                Text(
+                  '°C',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+              ],
             ),
           ],
         ),
