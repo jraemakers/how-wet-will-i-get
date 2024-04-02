@@ -11,12 +11,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF0077B6),
+        backgroundColor: const Color(0xFF0077B6),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 68.0),
               child: Center(
                 child: Text(
@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16), // Add some space between text and image
+            const SizedBox(height: 16), // Add some space between text and image
             Padding(
               padding: const EdgeInsets.only(bottom: 38.0), // Add padding only at the bottom
               child: Center(
@@ -48,13 +48,13 @@ class MainApp extends StatelessWidget {
                 width: 150, // Adjust width as needed
               ),
             ),
-            SizedBox(height: 1),
-            Divider(
+            const SizedBox(height: 1),
+            const Divider(
               color: Colors.white,
               thickness: 1.0,
             ),
             // Add text widget below the divider
-            Center(
+            const Center(
               child: Text(
                 '+3HR PREDICTION',
                 style: TextStyle(
@@ -65,11 +65,11 @@ class MainApp extends StatelessWidget {
                 ),
               ),
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 100.0, top: 20), // Add left padding
+                  padding: EdgeInsets.only(left: 100.0, top: 20), // Add left padding
                   child: Text(
                     'Temp',
                     style: TextStyle(
@@ -82,11 +82,11 @@ class MainApp extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 118.0), // Adjust left padding
+                  padding: EdgeInsets.only(left: 118.0), // Adjust left padding
                   child: Text(
                     '10',
                     style: TextStyle(
