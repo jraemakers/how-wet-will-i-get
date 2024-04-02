@@ -30,18 +30,25 @@ class MainApp extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 400),
+            SizedBox(height: 16), // Add some space between text and image
+            Center(
+              child: Image.asset(
+                'assets/images/rain-none.png', // Adjust path as per your asset location
+                height: 180, // Adjust height as needed
+                width: 200, // Adjust width as needed
+              ),
+            ),
+              Center(
+              child: Image.asset(
+                'assets/images/check.png', // Adjust path as per your asset location
+                height: 200, // Adjust height as needed
+                width: 150, // Adjust width as needed
+              ),
+            ),
+            SizedBox(height: 20),
             Divider(
               color: Colors.white,
               thickness: 1.0,
-            ),
-            // Add Image widget
-            Center(
-              child: Image.asset(
-                'assets/images/rain-hard.png', // Adjust path as per your asset location
-                height: 100, // Adjust height as needed
-                width: 100, // Adjust width as needed
-              ),
             ),
           ],
         ),
