@@ -25,6 +25,7 @@ class MainApp extends StatelessWidget {
                     fontSize: 24,
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
+                    fontFamily: 'Poppins',
                   ),
                 ),
               ),
