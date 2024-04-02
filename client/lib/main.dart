@@ -31,24 +31,39 @@ class MainApp extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16), // Add some space between text and image
-            Center(
-              child: Image.asset(
-                'assets/images/rain-none.png', // Adjust path as per your asset location
-                height: 180, // Adjust height as needed
-                width: 200, // Adjust width as needed
+            Padding(
+              padding: const EdgeInsets.only(bottom: 38.0), // Add padding only at the bottom
+              child: Center(
+                child: Image.asset(
+                  'assets/images/rain-none.png', // Adjust path as per your asset location
+                  height: 150, // Adjust height as needed
+                  width: 200, // Adjust width as needed
+                ),
               ),
             ),
-              Center(
+            Center(
               child: Image.asset(
                 'assets/images/check.png', // Adjust path as per your asset location
-                height: 200, // Adjust height as needed
+                height: 180, // Adjust height as needed
                 width: 150, // Adjust width as needed
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 1),
             const Divider(
               color: Colors.white,
               thickness: 1.0,
+            ),
+            // Add text widget below the divider
+            Center(
+              child: Text(
+                '+3HR PREDICTION',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontFamily: 'Poppins',
+                ),
+              ),
             ),
           ],
         ),
