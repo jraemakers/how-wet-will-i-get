@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 68.0),
               child: Center(
                 child: Text(
@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16), // Add some space between text and image
+            const SizedBox(height: 16), // Add some space between text and image
             Center(
               child: Image.asset(
                 'assets/images/rain-none.png', // Adjust path as per your asset location
@@ -45,8 +45,8 @@ class MainApp extends StatelessWidget {
                 width: 150, // Adjust width as needed
               ),
             ),
-            SizedBox(height: 20),
-            Divider(
+            const SizedBox(height: 20),
+            const Divider(
               color: Colors.white,
               thickness: 1.0,
             ),
