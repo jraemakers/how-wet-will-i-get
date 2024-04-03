@@ -15,11 +15,12 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  String _latitude = 'Unknown';
-  String _longitude = 'Unknown';
+  String _latitude = '';
+  String _longitude = '';
   Map<String, dynamic>? _weatherData;
   bool _isLoading = true;
-  String _weatherImage = 'Unknown';
+  String _weatherImage = '';
+  String _weatherDescription = '';
 
   @override
   void initState() {
@@ -44,7 +45,7 @@ class _MainAppState extends State<MainApp> {
   Future<void> _fetchWeatherData(double latitude, double longitude) async {
     const apiKey = 'e703b4fa9b3202d8da64ac0141c7a225';
     final apiUrl =
-        'https://api.openweathermap.org/data/2.5/forecast?q=dili&appid=$apiKey&units=metric';
+        'https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -55,14 +56,18 @@ class _MainAppState extends State<MainApp> {
           _isLoading = false;
         });
 
-        if (_weatherData!["list"][0]["main"]["rain"] == null) {
+        if (_weatherData!["list"][0]["rain"] == null) {
           _weatherImage = 'rain-none.png';
-        } else if (_weatherData!["list"][0]["main"]["rain"] < 2.5) {
+          _weatherDescription = 'check.png';
+        } else if (_weatherData!["list"][0]["rain"]["3h"] < 2.5) {
           _weatherImage = 'rain-licht.png';
-        } else if (_weatherData!["list"][0]["main"]["rain"] < 7.6) {
+          _weatherDescription = 'hoodie.png';
+        } else if (_weatherData!["list"][0]["rain"]["3h"] < 7.6) {
           _weatherImage = 'rain-normal.png';
+          _weatherDescription = 'protection.png';
         } else {
           _weatherImage = 'rain-hard.png';
+          _weatherDescription = 'raincoat.png';
         }
       } else {
         throw Exception('Failed to load weather data');
@@ -119,7 +124,7 @@ class _MainAppState extends State<MainApp> {
                   ),
                   Center(
                     child: Image.asset(
-                      'assets/images/check.png',
+                      'assets/images/$_weatherDescription',
                       height: 180,
                       width: 150,
                     ),
@@ -182,17 +187,16 @@ class _MainAppState extends State<MainApp> {
                         ),
                       ),
                       Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Center(
-                      child: Image.asset(
-                        'assets/images/$_weatherImage',
-                        height: 100,
-                        width: 100,
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Center(
+                          child: Image.asset(
+                            'assets/images/$_weatherImage',
+                            height: 100,
+                            width: 100,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
                     ],
-                    
                   ),
                 ],
               ),
