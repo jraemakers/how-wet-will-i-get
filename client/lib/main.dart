@@ -112,8 +112,8 @@ class _MainAppState extends State<MainApp> {
                     child: Center(
                       child: Image.asset(
                         'assets/images/$_weatherImage',
-                        height: 150,
-                        width: 200,
+                        height: 180,
+                        width: 180,
                       ),
                     ),
                   ),
@@ -144,7 +144,7 @@ class _MainAppState extends State<MainApp> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 100.0, top: 20),
+                        padding: EdgeInsets.only(left: 80.0, top: 15),
                         child: Text(
                           'Temp',
                           style: TextStyle(
@@ -161,7 +161,7 @@ class _MainAppState extends State<MainApp> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 118.0),
+                        padding: const EdgeInsets.only(left: 80.0),
                         child: Text(
                           '${_weatherData!["list"][0]["main"]["temp"].round()}',
                           style: const TextStyle(
@@ -181,7 +181,18 @@ class _MainAppState extends State<MainApp> {
                           fontFamily: 'Poppins',
                         ),
                       ),
+                      Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/$_weatherImage',
+                        height: 100,
+                        width: 100,
+                      ),
+                    ),
+                  ),
                     ],
+                    
                   ),
                 ],
               ),
