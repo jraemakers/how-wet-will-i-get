@@ -20,6 +20,7 @@ class _MainAppState extends State<MainApp> {
   Map<String, dynamic>? _weatherData;
   bool _isLoading = true;
   String _weatherImage = '';
+  String _weatherImage3hr = '';
   String _weatherDescription = '';
 
   @override
@@ -45,7 +46,7 @@ class _MainAppState extends State<MainApp> {
   Future<void> _fetchWeatherData(double latitude, double longitude) async {
     const apiKey = 'e703b4fa9b3202d8da64ac0141c7a225';
     final apiUrl =
-        'https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
+        'https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric&cnt=2';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -68,6 +69,16 @@ class _MainAppState extends State<MainApp> {
         } else {
           _weatherImage = 'rain-hard.png';
           _weatherDescription = 'raincoat.png';
+        }
+
+        if (_weatherData!["list"][1]["rain"] == null) {
+          _weatherImage3hr = 'rain-none.png';
+        } else if (_weatherData!["list"][1]["rain"]["3h"] < 2.5) {
+          _weatherImage3hr = 'rain-licht.png';
+        } else if (_weatherData!["list"][1]["rain"]["3h"] < 7.6) {
+          _weatherImage3hr = 'rain-normal.png';
+        } else {
+          _weatherImage3hr = 'rain-hard.png';
         }
       } else {
         throw Exception('Failed to load weather data');
@@ -170,7 +181,7 @@ class _MainAppState extends State<MainApp> {
                           Padding(
                             padding: const EdgeInsets.only(left: 80.0),
                             child: Text(
-                              '${_weatherData!["list"][0]["main"]["temp"].round()}',
+                              '${_weatherData!["list"][1]["main"]["temp"].round()}',
                               style: const TextStyle(
                                 fontSize: 66,
                                 color: Colors.white,
@@ -192,7 +203,7 @@ class _MainAppState extends State<MainApp> {
                             padding: const EdgeInsets.only(left: 10.0),
                             child: Center(
                               child: Image.asset(
-                                'assets/images/$_weatherImage',
+                                'assets/images/$_weatherImage3hr',
                                 height: 100,
                                 width: 100,
                               ),
@@ -202,34 +213,33 @@ class _MainAppState extends State<MainApp> {
                       ),
                     ],
                   ),
-Positioned(
-  bottom: 10, // Adjust as needed for vertical position
-  left: 0,
-  right: 0,
-  child: Center(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          'assets/images/placeholder.png', // Replace with your image path
-          height: 16, // Adjust the height as needed
-          width: 16, // Adjust the width as needed
-        ),
-        SizedBox(width: 5), // Adjust spacing between image and text
-        Text(
-          'LOCATION',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Poppins',
-          ),
-        ),
-      ],
-    ),
-  ),
-),
-
+                  Positioned(
+                    bottom: 10,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/placeholder.png',
+                            height: 16,
+                            width: 16,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${_weatherData!["city"]["name"]}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
       ),
