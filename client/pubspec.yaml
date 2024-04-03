@@ -28,6 +28,9 @@ flutter:
     - assets/images/hoodie.png
     - assets/images/protection.png
     - assets/images/raincoat.png
+    - assets/images/placeholder.png
+
+
     fonts:
         - family: Poppins
           fonts:

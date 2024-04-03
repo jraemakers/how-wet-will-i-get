@@ -8,7 +8,7 @@ void main() {
 }
 
 class MainApp extends StatefulWidget {
-  const MainApp({super.key});
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   _MainAppState createState() => _MainAppState();
@@ -93,111 +93,143 @@ class _MainAppState extends State<MainApp> {
                   ),
                 ),
               )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+            : Stack(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 68.0),
-                    child: Center(
-                      child: Text(
-                        'HOW WET WILL I GET?',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 38.0),
-                    child: Center(
-                      child: Image.asset(
-                        'assets/images/$_weatherImage',
-                        height: 180,
-                        width: 180,
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Image.asset(
-                      'assets/images/$_weatherDescription',
-                      height: 180,
-                      width: 150,
-                    ),
-                  ),
-                  const SizedBox(height: 1),
-                  const Divider(
-                    color: Colors.white,
-                    thickness: 1.0,
-                  ),
-                  const Center(
-                    child: Text(
-                      '+3HR PREDICTION',
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                  ),
-                  const Row(
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 80.0, top: 15),
-                        child: Text(
-                          'Temp',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: 'Poppins',
+                      const Padding(
+                        padding: EdgeInsets.only(top: 68.0),
+                        child: Center(
+                          child: Text(
+                            'HOW WET WILL I GET?',
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontFamily: 'Poppins',
+                            ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
+                      const SizedBox(height: 16),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: const EdgeInsets.only(bottom: 38.0),
+                        child: Center(
+                          child: Image.asset(
+                            'assets/images/$_weatherImage',
+                            height: 180,
+                            width: 180,
+                          ),
+                        ),
+                      ),
+                      Center(
+                        child: Image.asset(
+                          'assets/images/$_weatherDescription',
+                          height: 180,
+                          width: 150,
+                        ),
+                      ),
+                      const SizedBox(height: 1),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 1.0,
+                      ),
+                      const Center(
                         child: Text(
-                          '${_weatherData!["list"][0]["main"]["temp"].round()}',
-                          style: const TextStyle(
-                            fontSize: 66,
+                          '+3HR PREDICTION',
+                          style: TextStyle(
+                            fontSize: 24,
                             color: Colors.white,
                             fontWeight: FontWeight.w800,
                             fontFamily: 'Poppins',
                           ),
                         ),
                       ),
-                      const Text(
-                        '°C',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Center(
-                          child: Image.asset(
-                            'assets/images/$_weatherImage',
-                            height: 100,
-                            width: 100,
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 80.0, top: 15),
+                            child: Text(
+                              'Temp',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Poppins',
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 80.0),
+                            child: Text(
+                              '${_weatherData!["list"][0]["main"]["temp"].round()}',
+                              style: const TextStyle(
+                                fontSize: 66,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontFamily: 'Poppins',
+                              ),
+                            ),
+                          ),
+                          const Text(
+                            '°C',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: 'Poppins',
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/images/$_weatherImage',
+                                height: 100,
+                                width: 100,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+Positioned(
+  bottom: 10, // Adjust as needed for vertical position
+  left: 0,
+  right: 0,
+  child: Center(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/placeholder.png', // Replace with your image path
+          height: 16, // Adjust the height as needed
+          width: 16, // Adjust the width as needed
+        ),
+        SizedBox(width: 5), // Adjust spacing between image and text
+        Text(
+          'LOCATION',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Poppins',
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
                 ],
               ),
       ),
