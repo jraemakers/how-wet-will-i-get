@@ -8,19 +8,18 @@ void main() {
 }
 
 class MainApp extends StatefulWidget {
-  const MainApp({Key? key}) : super(key: key);
+  const MainApp({super.key});
 
   @override
   _MainAppState createState() => _MainAppState();
 }
 
 class _MainAppState extends State<MainApp> {
-  String _latitude = '';
-  String _longitude = '';
   Map<String, dynamic>? _weatherData;
+  Map<String, dynamic>? _forecastData;
   bool _isLoading = true;
   String _weatherImage = '';
-  String _weatherImage3hr = '';
+  String _forecastImage = '';
   String _weatherDescription = '';
 
   @override
@@ -33,37 +32,42 @@ class _MainAppState extends State<MainApp> {
     try {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
-      setState(() {
-        _latitude = position.latitude.toString();
-        _longitude = position.longitude.toString();
-      });
-      _fetchWeatherData(position.latitude, position.longitude);
+      _fetchData(position.latitude, position.longitude);
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> _fetchWeatherData(double latitude, double longitude) async {
+  Future<void> _fetchData(double latitude, double longitude) async {
     const apiKey = 'e703b4fa9b3202d8da64ac0141c7a225';
-    final apiUrl =
+    final weatherUrl =
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
+
+    final forecastUrl =
         'https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric&cnt=2';
 
     try {
-      final response = await http.get(Uri.parse(apiUrl));
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+      final currentWeatherResponse = await http.get(Uri.parse(weatherUrl));
+      final forecastResponse = await http.get(Uri.parse(forecastUrl));
+
+      if (currentWeatherResponse.statusCode == 200 &&
+          forecastResponse.statusCode == 200) {
+        final currentWeatherData = jsonDecode(currentWeatherResponse.body);
+        final forecastData = jsonDecode(forecastResponse.body);
+
         setState(() {
-          _weatherData = data;
+          _weatherData = currentWeatherData;
+          _forecastData = forecastData;
           _isLoading = false;
         });
 
-        if (_weatherData!["list"][0]["rain"] == null) {
+        if (_weatherData!["rain"] == null) {
           _weatherImage = 'rain-none.png';
           _weatherDescription = 'check.png';
-        } else if (_weatherData!["list"][0]["rain"]["3h"] < 2.5) {
+        } else if (_weatherData!["rain"]["1h"] < 2.5) {
           _weatherImage = 'rain-licht.png';
           _weatherDescription = 'hoodie.png';
-        } else if (_weatherData!["list"][0]["rain"]["3h"] < 7.6) {
+        } else if (_weatherData!["rain"]["1h"] < 7.6) {
           _weatherImage = 'rain-normal.png';
           _weatherDescription = 'protection.png';
         } else {
@@ -71,14 +75,14 @@ class _MainAppState extends State<MainApp> {
           _weatherDescription = 'raincoat.png';
         }
 
-        if (_weatherData!["list"][1]["rain"] == null) {
-          _weatherImage3hr = 'rain-none.png';
-        } else if (_weatherData!["list"][1]["rain"]["3h"] < 2.5) {
-          _weatherImage3hr = 'rain-licht.png';
-        } else if (_weatherData!["list"][1]["rain"]["3h"] < 7.6) {
-          _weatherImage3hr = 'rain-normal.png';
+        if (_forecastData!["list"][1]["rain"] == null) {
+          _forecastImage = 'rain-none.png';
+        } else if (_forecastData!["list"][1]["rain"]["3h"] < 2.5) {
+          _forecastImage = 'rain-licht.png';
+        } else if (_forecastData!["list"][1]["rain"]["3h"] < 7.6) {
+          _forecastImage = 'rain-normal.png';
         } else {
-          _weatherImage3hr = 'rain-hard.png';
+          _forecastImage = 'rain-hard.png';
         }
       } else {
         throw Exception('Failed to load weather data');
@@ -181,7 +185,7 @@ class _MainAppState extends State<MainApp> {
                           Padding(
                             padding: const EdgeInsets.only(left: 80.0),
                             child: Text(
-                              '${_weatherData!["list"][1]["main"]["temp"].round()}',
+                              '${_forecastData!["list"][1]["main"]["temp"].round()}',
                               style: const TextStyle(
                                 fontSize: 66,
                                 color: Colors.white,
@@ -203,7 +207,7 @@ class _MainAppState extends State<MainApp> {
                             padding: const EdgeInsets.only(left: 10.0),
                             child: Center(
                               child: Image.asset(
-                                'assets/images/$_weatherImage3hr',
+                                'assets/images/$_forecastImage',
                                 height: 100,
                                 width: 100,
                               ),
@@ -228,7 +232,7 @@ class _MainAppState extends State<MainApp> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            '${_weatherData!["city"]["name"]}',
+                            '${_forecastData!["city"]["name"]}',
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.white,
