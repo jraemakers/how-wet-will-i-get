@@ -231,8 +231,8 @@ class _MainAppState extends State<MainApp> {
                             width: 16,
                           ),
                           const SizedBox(width: 5),
-                          Text(
-                            '${_forecastData!["city"]["name"]}',
+                            Text(
+                            '${_forecastData!["city"]["name"]}'.toUpperCase(),
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.white,
