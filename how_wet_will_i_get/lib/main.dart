@@ -183,7 +183,7 @@ class _MainAppState extends State<MainApp> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: const EdgeInsets.only(left: 100.0),
                             child: Text(
                               '${_forecastData!["list"][1]["main"]["temp"].round()}',
                               style: const TextStyle(
