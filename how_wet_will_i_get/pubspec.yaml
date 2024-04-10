@@ -20,16 +20,14 @@ dev_dependencies:
 flutter:
     uses-material-design: true
     assets:
-    - assets/images/rain-none.png
-    - assets/images/rain-licht.png
-    - assets/images/rain-normal.png
-    - assets/images/rain-hard.png
-    - assets/images/check.png
-    - assets/images/hoodie.png
-    - assets/images/protection.png
-    - assets/images/raincoat.png
-    - assets/images/placeholder.png
-
+        - assets/images/rain-none.png
+        - assets/images/rain-licht.png
+        - assets/images/rain-normal.png
+        - assets/images/rain-hard.png
+        - assets/images/check.png
+        - assets/images/hoodie.png
+        - assets/images/protection.png
+        - assets/images/raincoat.png
 
     fonts:
         - family: Poppins
