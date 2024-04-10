@@ -142,7 +142,7 @@ class _MainAppState extends State<MainApp> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(top: 68.0),
+                      padding: EdgeInsets.only(top: 40.0),
                       child: Center(
                         child: Text(
                           'HOW WET WILL I GET?',
@@ -191,34 +191,35 @@ class _MainAppState extends State<MainApp> {
                       padding: const EdgeInsets.symmetric(horizontal: 100.0),
                       child: TextField(
                         controller: _locationController,
+                        textCapitalization: TextCapitalization.characters,
+                        style: const TextStyle(color: Colors.white),
                         onSubmitted: _handleSubmit,
                         decoration: const InputDecoration(
                           hintText: 'WHERE TO?',
-                          hintStyle: TextStyle(
-                            color: Colors.white,
-                          ),
+                          hintStyle: TextStyle(color: Colors.white),
                           prefixIcon: Icon(
                             Icons.location_on,
                             color: Colors.white,
                           ),
                           enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                            ),
+                            borderSide: BorderSide(color: Colors.white), 
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white), 
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 5),
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32.0),
+                      padding: EdgeInsets.symmetric(horizontal: 22.0),
                       child: Divider(
                         color: Colors.white,
                         thickness: 1.0,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 32.0),
+                      padding: const EdgeInsets.only(bottom: 20.0),
                       child: Center(
                         child: Image.asset(
                           'assets/images/$_weatherImage',
@@ -228,7 +229,7 @@ class _MainAppState extends State<MainApp> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 32.0),
+                      padding: const EdgeInsets.only(bottom: 20.0),
                       child: Center(
                         child: Image.asset(
                           'assets/images/$_weatherDescription',
